@@ -56,5 +56,20 @@ namespace projekt_trening.UserControls
             Global.exercises.Add(newExercise);
             this.Close();
         }
+
+        private void addExerciseModal_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void form_container_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

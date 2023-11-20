@@ -47,7 +47,7 @@
             // 
             this.Ćwiczenai.AutoSize = true;
             this.Ćwiczenai.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.Ćwiczenai.Location = new System.Drawing.Point(347, 17);
+            this.Ćwiczenai.Location = new System.Drawing.Point(357, 13);
             this.Ćwiczenai.Name = "Ćwiczenai";
             this.Ćwiczenai.Size = new System.Drawing.Size(110, 25);
             this.Ćwiczenai.TabIndex = 1;
@@ -56,6 +56,7 @@
             // 
             // exercises_container
             // 
+            this.exercises_container.AutoScroll = true;
             this.exercises_container.Location = new System.Drawing.Point(3, 45);
             this.exercises_container.Name = "exercises_container";
             this.exercises_container.Size = new System.Drawing.Size(794, 328);
@@ -63,12 +64,17 @@
             // 
             // add_exercise_btn
             // 
-            this.add_exercise_btn.Location = new System.Drawing.Point(699, 17);
+            this.add_exercise_btn.BackColor = System.Drawing.Color.SeaGreen;
+            this.add_exercise_btn.FlatAppearance.BorderSize = 0;
+            this.add_exercise_btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.add_exercise_btn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.add_exercise_btn.ForeColor = System.Drawing.Color.White;
+            this.add_exercise_btn.Location = new System.Drawing.Point(678, 13);
             this.add_exercise_btn.Name = "add_exercise_btn";
-            this.add_exercise_btn.Size = new System.Drawing.Size(75, 23);
+            this.add_exercise_btn.Size = new System.Drawing.Size(93, 29);
             this.add_exercise_btn.TabIndex = 4;
-            this.add_exercise_btn.Text = "Dodaj nowe";
-            this.add_exercise_btn.UseVisualStyleBackColor = true;
+            this.add_exercise_btn.Text = "Dodaj";
+            this.add_exercise_btn.UseVisualStyleBackColor = false;
             this.add_exercise_btn.Click += new System.EventHandler(this.add_exercise_btn_Click);
             // 
             // UC_exercises

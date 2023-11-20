@@ -39,7 +39,6 @@ namespace projekt_trening.UserControls
                 item.Value = exercise;
                 select_exercise_combobox.Items.Add(item);
             }
-            
         }
         public addExercisesGroupModal()
         {

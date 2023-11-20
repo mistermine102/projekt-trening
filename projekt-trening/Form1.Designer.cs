@@ -30,13 +30,13 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.navbar = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.guna2Button4 = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Button3 = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
             this.panelContainer = new System.Windows.Forms.Panel();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.navbar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -55,9 +55,23 @@
             this.navbar.Size = new System.Drawing.Size(800, 74);
             this.navbar.TabIndex = 0;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pictureBox1.Location = new System.Drawing.Point(660, 0);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(140, 74);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 4;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            // 
             // guna2Button4
             // 
             this.guna2Button4.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
+            this.guna2Button4.CheckedState.FillColor = System.Drawing.Color.SeaGreen;
+            this.guna2Button4.CheckedState.ForeColor = System.Drawing.Color.White;
             this.guna2Button4.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.guna2Button4.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.guna2Button4.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
@@ -65,6 +79,7 @@
             this.guna2Button4.FillColor = System.Drawing.Color.White;
             this.guna2Button4.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.guna2Button4.ForeColor = System.Drawing.Color.Black;
+            this.guna2Button4.HoverState.FillColor = System.Drawing.Color.LightGray;
             this.guna2Button4.Location = new System.Drawing.Point(501, 0);
             this.guna2Button4.Name = "guna2Button4";
             this.guna2Button4.Size = new System.Drawing.Size(153, 74);
@@ -75,6 +90,8 @@
             // guna2Button3
             // 
             this.guna2Button3.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
+            this.guna2Button3.CheckedState.FillColor = System.Drawing.Color.SeaGreen;
+            this.guna2Button3.CheckedState.ForeColor = System.Drawing.Color.White;
             this.guna2Button3.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.guna2Button3.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.guna2Button3.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
@@ -82,6 +99,7 @@
             this.guna2Button3.FillColor = System.Drawing.Color.White;
             this.guna2Button3.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.guna2Button3.ForeColor = System.Drawing.Color.Black;
+            this.guna2Button3.HoverState.FillColor = System.Drawing.Color.LightGray;
             this.guna2Button3.Location = new System.Drawing.Point(337, 0);
             this.guna2Button3.Name = "guna2Button3";
             this.guna2Button3.Size = new System.Drawing.Size(168, 74);
@@ -92,6 +110,8 @@
             // guna2Button2
             // 
             this.guna2Button2.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
+            this.guna2Button2.CheckedState.FillColor = System.Drawing.Color.SeaGreen;
+            this.guna2Button2.CheckedState.ForeColor = System.Drawing.Color.White;
             this.guna2Button2.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.guna2Button2.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.guna2Button2.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
@@ -99,6 +119,7 @@
             this.guna2Button2.FillColor = System.Drawing.Color.White;
             this.guna2Button2.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.guna2Button2.ForeColor = System.Drawing.Color.Black;
+            this.guna2Button2.HoverState.FillColor = System.Drawing.Color.LightGray;
             this.guna2Button2.Location = new System.Drawing.Point(169, 0);
             this.guna2Button2.Name = "guna2Button2";
             this.guna2Button2.Size = new System.Drawing.Size(173, 74);
@@ -110,6 +131,8 @@
             // 
             this.guna2Button1.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
             this.guna2Button1.Checked = true;
+            this.guna2Button1.CheckedState.FillColor = System.Drawing.Color.SeaGreen;
+            this.guna2Button1.CheckedState.ForeColor = System.Drawing.Color.White;
             this.guna2Button1.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.guna2Button1.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.guna2Button1.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
@@ -117,6 +140,7 @@
             this.guna2Button1.FillColor = System.Drawing.Color.White;
             this.guna2Button1.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.guna2Button1.ForeColor = System.Drawing.Color.Black;
+            this.guna2Button1.HoverState.FillColor = System.Drawing.Color.LightGray;
             this.guna2Button1.Location = new System.Drawing.Point(0, 0);
             this.guna2Button1.Name = "guna2Button1";
             this.guna2Button1.Size = new System.Drawing.Size(170, 74);
@@ -131,18 +155,6 @@
             this.panelContainer.Name = "panelContainer";
             this.panelContainer.Size = new System.Drawing.Size(800, 376);
             this.panelContainer.TabIndex = 1;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
-            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox1.Location = new System.Drawing.Point(660, 0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(140, 74);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 4;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // Form1
             // 
