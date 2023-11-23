@@ -6,6 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Net;
 using System.Net.Http;
 using System.Runtime.CompilerServices;
@@ -27,6 +28,38 @@ namespace projekt_trening.UserControls
             renderExercises();
 
         }
+
+        async void handleDeleteClick(object sender, EventArgs e, string exerciseId)
+        {
+            await deleteExercise(exerciseId);
+        }
+        async Task deleteExercise(string exerciseId)
+        {
+            try
+            {
+                using (HttpClient client = new HttpClient())
+                {
+                    var body = new { exerciseId = exerciseId};
+
+                    string json = JsonConvert.SerializeObject(body);
+
+                    HttpRequestMessage request = new HttpRequestMessage
+                    {
+                        Method = HttpMethod.Delete,
+                        RequestUri = new Uri(Global.apiUrl + "/exercise"),
+                        Content = new StringContent(json, Encoding.UTF8, "application/json")
+
+                    };
+                    HttpResponseMessage response = await client.SendAsync(request);
+                    response.EnsureSuccessStatusCode();
+
+                }
+                renderExercises();
+            } catch(Exception ex)
+            {
+
+            }
+        }
         async Task getExercises()
         {
             using (HttpClient client = new HttpClient()) 
@@ -40,7 +73,7 @@ namespace projekt_trening.UserControls
                     GetExerciseResponse data = JsonConvert.DeserializeObject<GetExerciseResponse>(json);
 
                     Global.exercises = data.exercises;
-                } catch(HttpRequestException e)
+                } catch(HttpRequestException ex)
                 {
                     //failed to read the exercises
                 }
@@ -75,6 +108,16 @@ namespace projekt_trening.UserControls
                 exercise_card.BackColor = Color.DarkSeaGreen;
                 exercise_card.Padding = new Padding(5, 10, 5, 10);
                 exercise_card.MinimumSize = new Size(this.ClientSize.Width/2-20, 500);
+
+                //button to delete the exercise
+                Button deleteBtn = new Button();
+                deleteBtn.Click += delegate (object sender, EventArgs e)
+                {
+                    handleDeleteClick(sender, e, exercise._id);
+                };
+                deleteBtn.Text = "Usuń";
+                exercise_card.Controls.Add(deleteBtn);
+
 
                 //add information about the exercise 
                 Label name_label = new Label();
