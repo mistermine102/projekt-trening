@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -6,16 +7,63 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Script.Serialization;
 using System.Windows.Forms;
+using System.Windows.Forms.PropertyGridInternal;
 
 namespace projekt_trening.UserControls
 {
+
     public partial class UC_exercises : UserControl
     {
+        async void displayExercises()
+        {
+            await getExercises();
+            renderExercises();
+
+        }
+        async Task getExercises()
+        {
+            using (HttpClient client = new HttpClient()) 
+            {
+                try
+                {
+                    HttpResponseMessage response = await client.GetAsync(Global.apiUrl + "/exercise");
+                    response.EnsureSuccessStatusCode();
+                    string json = await response.Content.ReadAsStringAsync();
+
+                    GetExerciseResponse data = JsonConvert.DeserializeObject<GetExerciseResponse>(json);
+
+                    Global.exercises = data.exercises;
+                } catch(HttpRequestException e)
+                {
+                    //failed to read the exercises
+                }
+            }
+        }
+        void setImageSourceAsync(PictureBox picture, string url)
+        {
+            try
+            {
+                WebRequest request = WebRequest.Create(url);
+
+                using (WebResponse response = request.GetResponse())
+                {
+                    using (Stream str = response.GetResponseStream())
+                    {
+                        picture.Image = Bitmap.FromStream(str);
+                    }
+                }
+            } catch(Exception e)
+            {
+                setImageSourceAsync(picture, "https://t4.ftcdn.net/jpg/04/99/93/31/360_F_499933117_ZAUBfv3P1HEOsZDrnkbNCt4jc3AodArl.jpg");
+            }
+        }
         void renderExercises()
         {
             foreach (Exercise exercise in Global.exercises)
@@ -41,14 +89,7 @@ namespace projekt_trening.UserControls
                 PictureBox picture = new PictureBox();
                 picture.MinimumSize = new Size(this.ClientSize.Width / 2 - 30, this.ClientSize.Height / 2 - 30);
                 picture.SizeMode = PictureBoxSizeMode.Zoom;
- 
-                WebRequest request = WebRequest.Create(exercise.imgUrl);
-                using (var response = request.GetResponse()) {
-                    using (var str = response.GetResponseStream())
-                    {
-                        picture.Image = Bitmap.FromStream(str);
-                    }
-                }
+                setImageSourceAsync(picture, exercise.imgUrl);
 
                 exercise_card.Controls.Add(picture);
 
@@ -65,43 +106,9 @@ namespace projekt_trening.UserControls
         public UC_exercises()
         {
             InitializeComponent();
-
-            Exercise benchpress = new Exercise()
-            {
-                _id = "1",
-                name = "Wyciskanie na ławce płaskiej.",
-                description = "Klasyczne ćwiczenie aby rozwijać klatkę piersiową.",
-                imgUrl = "https://www.untappedsupplement.com/cdn/shop/articles/image_41.png?v=1538465967",
-                difficulty = 2,
-                targetMuscles = new List<string> { "chest", "triceps" }
-            };
-            Exercise deadlift = new Exercise()
-            {
-                _id = "2",
-                name = "Martwy ciąg",
-                description = "Świetne ćwiczenie na dokurwione plecy.",
-                imgUrl = "https://www.verywellfit.com/thmb/55S0eeMEtSOE-_fVewZe0IXuAIE=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-1265038884-59f6b5a0767a4be9aaf3af5125954eff.jpg",
-                difficulty = 3,
-                targetMuscles = new List<string> { "lats", "lower back", "upper back", "traps"}
-            };
-            if(!Global.exercisesLoaded)
-            {
-                Global.exercises.Add(benchpress);
-                Global.exercises.Add(deadlift);
-                Global.exercises.Add(benchpress);
-                Global.exercises.Add(deadlift);
-                Global.exercises.Add(benchpress);
-                Global.exercises.Add(benchpress);
-                Global.exercises.Add(deadlift);
-                Global.exercises.Add(benchpress);
-                Global.exercises.Add(deadlift);
-                Global.exercises.Add(benchpress);
-                Global.exercises.Add(deadlift);
-                Global.exercises.Add(deadlift);
-            }
+            displayExercises();
             Global.exercisesLoaded = true;
             Global.exercisesContainer = exercises_container;
-            renderExercises();
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -120,6 +127,16 @@ namespace projekt_trening.UserControls
         {
             addExerciseModal.ShowDialog();
         }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+    }
+    class GetExerciseResponse
+    {
+        public string message;
+        public List<Exercise> exercises;
     }
     static class Global
     {
@@ -127,6 +144,7 @@ namespace projekt_trening.UserControls
         public static List<ExercisesGroup> ExercisesGroups = new List<ExercisesGroup>();
         public static bool exercisesLoaded = false;
         public static Control exercisesContainer;
+        public static string apiUrl = "http://localhost:8000";
     }
     class Exercise
     {

@@ -49,6 +49,7 @@
             this.exercises_groups_container.Name = "exercises_groups_container";
             this.exercises_groups_container.Size = new System.Drawing.Size(794, 334);
             this.exercises_groups_container.TabIndex = 3;
+            this.exercises_groups_container.Paint += new System.Windows.Forms.PaintEventHandler(this.exercises_groups_container_Paint);
             // 
             // add_exercises_group_btn
             // 

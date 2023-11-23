@@ -1,9 +1,11 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -32,7 +34,24 @@ namespace projekt_trening.UserControls
 
         }
 
-        private void add_exercise_btn_Click(object sender, EventArgs e)
+        async Task createExercise(Exercise newExercise)
+        {
+            try
+            {
+                using (HttpClient client = new HttpClient())
+                {
+                    string json = JsonConvert.SerializeObject(newExercise);
+                    StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+                    await client.PostAsync(Global.apiUrl + "/exercise", content);
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        private async void add_exercise_btn_Click(object sender, EventArgs e)
         {
             List<string> targetMuscles = new List<string>();
 
@@ -45,15 +64,13 @@ namespace projekt_trening.UserControls
 
             Exercise newExercise = new Exercise()
             {
-                _id = "123",
                 name = name_textbox.Text,
                 description = desc_textbox.Text,
                 imgUrl = img_url_textbox.Text,
                 difficulty = 1,
                 targetMuscles = targetMuscles
             };
-
-            Global.exercises.Add(newExercise);
+            createExercise(newExercise);
             this.Close();
         }
 

@@ -49,6 +49,10 @@ namespace projekt_trening.UserControls
         {
             addExercisesGroupModal.ShowDialog();
         }
+
+        private void exercises_groups_container_Paint(object sender, PaintEventArgs e)
+        {
+        }
     }
     class ExerciseGroupItem
     {
