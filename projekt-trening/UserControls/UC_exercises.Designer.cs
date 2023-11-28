@@ -52,7 +52,6 @@
             this.Ćwiczenai.Size = new System.Drawing.Size(110, 25);
             this.Ćwiczenai.TabIndex = 1;
             this.Ćwiczenai.Text = "Ćwiczenia";
-            this.Ćwiczenai.Click += new System.EventHandler(this.Ćwiczenai_Click);
             // 
             // exercises_container
             // 
@@ -67,11 +66,11 @@
             this.add_exercise_btn.BackColor = System.Drawing.Color.SeaGreen;
             this.add_exercise_btn.FlatAppearance.BorderSize = 0;
             this.add_exercise_btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.add_exercise_btn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.add_exercise_btn.Font = new System.Drawing.Font("Microsoft YaHei", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.add_exercise_btn.ForeColor = System.Drawing.Color.White;
-            this.add_exercise_btn.Location = new System.Drawing.Point(678, 13);
+            this.add_exercise_btn.Location = new System.Drawing.Point(678, 8);
             this.add_exercise_btn.Name = "add_exercise_btn";
-            this.add_exercise_btn.Size = new System.Drawing.Size(93, 29);
+            this.add_exercise_btn.Size = new System.Drawing.Size(90, 30);
             this.add_exercise_btn.TabIndex = 4;
             this.add_exercise_btn.Text = "Dodaj";
             this.add_exercise_btn.UseVisualStyleBackColor = false;

@@ -45,6 +45,7 @@
             // 
             // exercises_groups_container
             // 
+            this.exercises_groups_container.AutoScroll = true;
             this.exercises_groups_container.Location = new System.Drawing.Point(3, 39);
             this.exercises_groups_container.Name = "exercises_groups_container";
             this.exercises_groups_container.Size = new System.Drawing.Size(794, 334);
@@ -53,12 +54,17 @@
             // 
             // add_exercises_group_btn
             // 
-            this.add_exercises_group_btn.Location = new System.Drawing.Point(684, 10);
+            this.add_exercises_group_btn.BackColor = System.Drawing.Color.SeaGreen;
+            this.add_exercises_group_btn.FlatAppearance.BorderSize = 0;
+            this.add_exercises_group_btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.add_exercises_group_btn.Font = new System.Drawing.Font("Microsoft YaHei", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.add_exercises_group_btn.ForeColor = System.Drawing.Color.White;
+            this.add_exercises_group_btn.Location = new System.Drawing.Point(685, 7);
             this.add_exercises_group_btn.Name = "add_exercises_group_btn";
-            this.add_exercises_group_btn.Size = new System.Drawing.Size(75, 23);
+            this.add_exercises_group_btn.Size = new System.Drawing.Size(90, 29);
             this.add_exercises_group_btn.TabIndex = 4;
-            this.add_exercises_group_btn.Text = "Dodaj zestaw ćwiczeń";
-            this.add_exercises_group_btn.UseVisualStyleBackColor = true;
+            this.add_exercises_group_btn.Text = "Dodaj";
+            this.add_exercises_group_btn.UseVisualStyleBackColor = false;
             this.add_exercises_group_btn.Click += new System.EventHandler(this.add_exercises_group_btn_Click);
             // 
             // UC_plan

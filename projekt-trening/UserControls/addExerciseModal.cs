@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Guna.UI2.WinForms.Suite;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,19 +10,17 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace projekt_trening.UserControls
 {
     public partial class addExerciseModal : Form
     {
+        public event EventHandler exerciseAddedEvent;
+
         public addExerciseModal()
         {
             InitializeComponent();
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void label3_Click(object sender, EventArgs e)
@@ -32,23 +31,6 @@ namespace projekt_trening.UserControls
         private void label1_Click(object sender, EventArgs e)
         {
 
-        }
-
-        async Task createExercise(Exercise newExercise)
-        {
-            try
-            {
-                using (HttpClient client = new HttpClient())
-                {
-                    string json = JsonConvert.SerializeObject(newExercise);
-                    StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
-                    await client.PostAsync(Global.apiUrl + "/exercise", content);
-                }
-            }
-            catch (Exception ex)
-            {
-
-            }
         }
 
         private async void add_exercise_btn_Click(object sender, EventArgs e)
@@ -62,15 +44,30 @@ namespace projekt_trening.UserControls
                 targetMuscles.Add(muscle);
             }
 
+            string name = name_textbox.Text;
+            string description = desc_textbox.Text;
+
+            if(name.Length == 0)
+            {
+                MessageBox.Show("Nazwa nie może być pusta.");
+                return;
+            }
+            if (description.Length == 0)
+            {
+                MessageBox.Show("Opis nie może być pusty.");
+                return;
+            }
+
             Exercise newExercise = new Exercise()
             {
-                name = name_textbox.Text,
-                description = desc_textbox.Text,
+                name = name,
+                description = description,
                 imgUrl = img_url_textbox.Text,
                 difficulty = 1,
                 targetMuscles = targetMuscles
             };
-            createExercise(newExercise);
+            await Exercise.createExercise(newExercise);
+            exerciseAddedEvent?.Invoke(sender, e);
             this.Close();
         }
 

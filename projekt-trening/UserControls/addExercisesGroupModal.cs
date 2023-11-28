@@ -13,15 +13,16 @@ namespace projekt_trening.UserControls
 {
     public partial class addExercisesGroupModal : Form
     {
-        List<ExerciseGroupItem> selectedExercises = new List<ExerciseGroupItem>();
+        public event EventHandler exercisesGroupAddedEvent;
+        List<ExercisesGroupItem> selectedExercises = new List<ExercisesGroupItem>();
 
         public void createComboboxOptions()
         {
-            foreach (Exercise exercise in Global.exercises)
+            foreach (Exercise exercise in Exercise.exercises)
             {
                 //check if exercise is already selected
                 bool isExerciseSelected = false;
-                foreach(ExerciseGroupItem selectedExercise in selectedExercises)
+                foreach(ExercisesGroupItem selectedExercise in selectedExercises)
                 {
                     if(selectedExercise.exercise._id == exercise._id)
                     {
@@ -46,19 +47,21 @@ namespace projekt_trening.UserControls
             createComboboxOptions();
         }
 
-        private void add_exercises_group_btn_Click(object sender, EventArgs e)
+        private async void add_exercises_group_btn_Click(object sender, EventArgs e)
         {
             ExercisesGroup newExercisesGroup = new ExercisesGroup() {
                 name = exercise_name_textbox.Text,
-                exercises = new List<ExerciseGroupItem>()
+                exercises = new List<ExercisesGroupItem>()
             };
 
-            foreach(ExerciseGroupItem exercise in selectedExercises)
+            foreach(ExercisesGroupItem exercise in selectedExercises)
             {
                 newExercisesGroup.exercises.Add(exercise);
             }
 
-            Global.ExercisesGroups.Add(newExercisesGroup);
+            await ExercisesGroup.createExercisesGroup(newExercisesGroup);
+            exercisesGroupAddedEvent?.Invoke(sender, e);
+            this.Close();
         }
 
         private void add_exercise_btn_Click(object sender, EventArgs e)
@@ -70,15 +73,15 @@ namespace projekt_trening.UserControls
             Exercise selectedExercise = (Exercise)(select_exercise_combobox.SelectedItem as ComboboxItem).Value;
 
             Label exerciseName = new Label();
-            exerciseName.Text = selectedExercise.description;
+            exerciseName.Text = selectedExercise.name;
             selected_exercises_container.Controls.Add(exerciseName);
 
-            ExerciseGroupItem exerciseGroup = new ExerciseGroupItem()
+            ExercisesGroupItem exerciseGroup = new ExercisesGroupItem()
             {
                 exercise = selectedExercise,
                 sets = int.Parse(sets_textbox.Text),
                 reps = int.Parse(reps_textbox.Text),
-                order = 1
+                order = 0
             };
 
             selectedExercises.Add(exerciseGroup);
@@ -98,17 +101,6 @@ namespace projekt_trening.UserControls
         private void label3_Click(object sender, EventArgs e)
         {
 
-        }
-    }
-
-    public class ComboboxItem
-    {
-        public string Text { get; set; }
-        public object Value { get; set; }
-
-        public override string ToString()
-        {
-            return Text;
         }
     }
 }

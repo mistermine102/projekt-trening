@@ -22,62 +22,20 @@ namespace projekt_trening.UserControls
 
     public partial class UC_exercises : UserControl
     {
+        async void handleExerciseAdded(object sender, EventArgs e)
+        {
+            displayExercises();
+        }
         async void displayExercises()
         {
-            await getExercises();
+            exercises_container.Controls.Clear();
+            await Exercise.getExercises();
             renderExercises();
-
         }
-
         async void handleDeleteClick(object sender, EventArgs e, string exerciseId)
         {
-            await deleteExercise(exerciseId);
-        }
-        async Task deleteExercise(string exerciseId)
-        {
-            try
-            {
-                using (HttpClient client = new HttpClient())
-                {
-                    var body = new { exerciseId = exerciseId};
-
-                    string json = JsonConvert.SerializeObject(body);
-
-                    HttpRequestMessage request = new HttpRequestMessage
-                    {
-                        Method = HttpMethod.Delete,
-                        RequestUri = new Uri(Global.apiUrl + "/exercise"),
-                        Content = new StringContent(json, Encoding.UTF8, "application/json")
-
-                    };
-                    HttpResponseMessage response = await client.SendAsync(request);
-                    response.EnsureSuccessStatusCode();
-
-                }
-                renderExercises();
-            } catch(Exception ex)
-            {
-
-            }
-        }
-        async Task getExercises()
-        {
-            using (HttpClient client = new HttpClient()) 
-            {
-                try
-                {
-                    HttpResponseMessage response = await client.GetAsync(Global.apiUrl + "/exercise");
-                    response.EnsureSuccessStatusCode();
-                    string json = await response.Content.ReadAsStringAsync();
-
-                    GetExerciseResponse data = JsonConvert.DeserializeObject<GetExerciseResponse>(json);
-
-                    Global.exercises = data.exercises;
-                } catch(HttpRequestException ex)
-                {
-                    //failed to read the exercises
-                }
-            }
+            await Exercise.deleteExercise(exerciseId);
+            displayExercises();
         }
         void setImageSourceAsync(PictureBox picture, string url)
         {
@@ -99,7 +57,7 @@ namespace projekt_trening.UserControls
         }
         void renderExercises()
         {
-            foreach (Exercise exercise in Global.exercises)
+            foreach (Exercise exercise in Exercise.exercises)
             {
                 //create an exercise card
                 FlowLayoutPanel exercise_card = new FlowLayoutPanel();
@@ -150,16 +108,10 @@ namespace projekt_trening.UserControls
         {
             InitializeComponent();
             displayExercises();
-            Global.exercisesLoaded = true;
-            Global.exercisesContainer = exercises_container;
+            addExerciseModal.exerciseAddedEvent += handleExerciseAdded;
         }
 
         private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Ćwiczenai_Click(object sender, EventArgs e)
         {
 
         }
@@ -170,33 +122,9 @@ namespace projekt_trening.UserControls
         {
             addExerciseModal.ShowDialog();
         }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-    }
-    class GetExerciseResponse
-    {
-        public string message;
-        public List<Exercise> exercises;
     }
     static class Global
     {
-        public static List<Exercise> exercises = new List<Exercise>();
-        public static List<ExercisesGroup> ExercisesGroups = new List<ExercisesGroup>();
-        public static bool exercisesLoaded = false;
-        public static Control exercisesContainer;
         public static string apiUrl = "http://localhost:8000";
     }
-    class Exercise
-    {
-        public string _id;
-        public string name;
-        public string description;
-        public string imgUrl;
-        public int difficulty;
-        public List<string> targetMuscles;
-    }
-
 }

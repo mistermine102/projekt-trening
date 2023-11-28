@@ -56,6 +56,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Calendar.cs" />
+    <Compile Include="ComboboxItem.cs" />
+    <Compile Include="Exercise.cs" />
+    <Compile Include="ExercisesGroup.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -75,6 +79,12 @@
     </Compile>
     <Compile Include="UserControls\addExercisesGroupModal.Designer.cs">
       <DependentUpon>addExercisesGroupModal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\calendarDayModal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserControls\calendarDayModal.Designer.cs">
+      <DependentUpon>calendarDayModal.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\UC_calendar.cs">
       <SubType>UserControl</SubType>
@@ -117,6 +127,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\addExercisesGroupModal.resx">
       <DependentUpon>addExercisesGroupModal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\calendarDayModal.resx">
+      <DependentUpon>calendarDayModal.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\UC_calendar.resx">
       <DependentUpon>UC_calendar.cs</DependentUpon>
