@@ -17,29 +17,25 @@ namespace projekt_trening.UserControls
     public partial class addExerciseModal : Form
     {
         public event EventHandler exerciseAddedEvent;
-
+        public static bool inEditMode = false;
+        public static Exercise exerciseToEdit;
         public addExerciseModal()
         {
             InitializeComponent();
+
+            if(inEditMode)
+            {
+                prepopulateValues();
+                changeLabelsInEditMode();
+            }
         }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private async void add_exercise_btn_Click(object sender, EventArgs e)
+        async Task addExercise()
         {
             List<string> targetMuscles = new List<string>();
 
             string[] targetMusclesArr = target_muscles_textbox.Text.Split(',');
-            
-            foreach(string muscle in targetMusclesArr)
+
+            foreach (string muscle in targetMusclesArr)
             {
                 targetMuscles.Add(muscle);
             }
@@ -47,7 +43,7 @@ namespace projekt_trening.UserControls
             string name = name_textbox.Text;
             string description = desc_textbox.Text;
 
-            if(name.Length == 0)
+            if (name.Length == 0)
             {
                 MessageBox.Show("Nazwa nie może być pusta.");
                 return;
@@ -66,7 +62,41 @@ namespace projekt_trening.UserControls
                 difficulty = 1,
                 targetMuscles = targetMuscles
             };
-            await Exercise.createExercise(newExercise);
+
+            if(inEditMode)
+            {
+                newExercise._id = exerciseToEdit._id;
+                await Exercise.editExercise(newExercise);
+            } else
+            {
+                await Exercise.createExercise(newExercise);
+            }
+        }
+        void prepopulateValues()
+        {
+            name_textbox.Text = exerciseToEdit.name;
+            desc_textbox.Text = exerciseToEdit.description;
+            img_url_textbox.Text = exerciseToEdit.imgUrl;
+        }
+
+        void changeLabelsInEditMode()
+        {
+            title.Text = "Edytuj ćwiczenie";
+            add_exercise_btn.Text = "Edytuj";
+        }
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private async void add_exercise_btn_Click(object sender, EventArgs e)
+        {
+            await addExercise();
             exerciseAddedEvent?.Invoke(sender, e);
             this.Close();
         }

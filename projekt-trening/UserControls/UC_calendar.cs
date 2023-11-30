@@ -32,9 +32,11 @@ namespace projekt_trening.UserControls
                 day_container.FlowDirection = FlowDirection.TopDown;
                 day_container.BorderStyle = BorderStyle.FixedSingle;
                 day_container.MaximumSize = new Size(this.ClientSize.Width / 5, 500);
+                day_container.Padding = new Padding(5, 5, 5, 5);
 
                 Label day_name = new Label();
                 day_name.Text = day.dayName;
+                day_name.Font = new Font("Microsoft YaHei", 10, FontStyle.Bold);
                 day_container.Controls.Add(day_name);
 
                 Label exercises_group_name = new Label();

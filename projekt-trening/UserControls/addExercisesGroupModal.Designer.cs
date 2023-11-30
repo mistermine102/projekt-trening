@@ -34,19 +34,20 @@
             this.select_exercise_combobox = new System.Windows.Forms.ComboBox();
             this.add_exercise_btn = new System.Windows.Forms.Button();
             this.selected_exercises_container = new System.Windows.Forms.FlowLayoutPanel();
+            this.label5 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.sets_textbox = new System.Windows.Forms.TextBox();
             this.reps_textbox = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
+            this.title = new System.Windows.Forms.Label();
             this.selected_exercises_container.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(301, 29);
+            this.label1.Location = new System.Drawing.Point(301, 54);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(82, 13);
             this.label1.TabIndex = 0;
@@ -55,7 +56,7 @@
             // 
             // exercise_name_textbox
             // 
-            this.exercise_name_textbox.Location = new System.Drawing.Point(304, 45);
+            this.exercise_name_textbox.Location = new System.Drawing.Point(304, 70);
             this.exercise_name_textbox.Name = "exercise_name_textbox";
             this.exercise_name_textbox.Size = new System.Drawing.Size(200, 20);
             this.exercise_name_textbox.TabIndex = 1;
@@ -100,12 +101,22 @@
             // 
             // selected_exercises_container
             // 
+            this.selected_exercises_container.AutoScroll = true;
             this.selected_exercises_container.Controls.Add(this.label5);
             this.selected_exercises_container.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.selected_exercises_container.Location = new System.Drawing.Point(304, 299);
             this.selected_exercises_container.Name = "selected_exercises_container";
             this.selected_exercises_container.Size = new System.Drawing.Size(200, 103);
             this.selected_exercises_container.TabIndex = 5;
+            this.selected_exercises_container.Paint += new System.Windows.Forms.PaintEventHandler(this.selected_exercises_container_Paint);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(3, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(0, 13);
+            this.label5.TabIndex = 0;
             // 
             // label2
             // 
@@ -149,19 +160,23 @@
             this.label4.TabIndex = 10;
             this.label4.Text = "Ćwiczenie";
             // 
-            // label5
+            // title
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(3, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(0, 13);
-            this.label5.TabIndex = 0;
+            this.title.AutoSize = true;
+            this.title.Font = new System.Drawing.Font("Microsoft YaHei", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.title.Location = new System.Drawing.Point(355, 21);
+            this.title.Name = "title";
+            this.title.Size = new System.Drawing.Size(98, 19);
+            this.title.TabIndex = 11;
+            this.title.Text = "Dodaj zestaw";
+            this.title.Click += new System.EventHandler(this.label6_Click);
             // 
             // addExercisesGroupModal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.title);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.reps_textbox);
             this.Controls.Add(this.sets_textbox);
@@ -196,5 +211,6 @@
         private System.Windows.Forms.TextBox reps_textbox;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label title;
     }
 }

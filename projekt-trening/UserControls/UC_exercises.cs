@@ -26,6 +26,15 @@ namespace projekt_trening.UserControls
         {
             displayExercises();
         }
+
+        async void handleEditClick(object sender, EventArgs e, Exercise exercise)
+        {
+            addExerciseModal.inEditMode = true;
+            addExerciseModal.exerciseToEdit = exercise;
+
+            addExerciseModal modal = new addExerciseModal();
+            modal.ShowDialog();
+        }
         async void displayExercises()
         {
             exercises_container.Controls.Clear();
@@ -76,6 +85,14 @@ namespace projekt_trening.UserControls
                 deleteBtn.Text = "Usuń";
                 exercise_card.Controls.Add(deleteBtn);
 
+                Button editBtn = new Button();
+                editBtn.Click += delegate (object sender, EventArgs e)
+                {
+                    handleEditClick(sender, e, exercise);
+                };
+                editBtn.Text = "Edytuj";
+                exercise_card.Controls.Add(editBtn);
+
 
                 //add information about the exercise 
                 Label name_label = new Label();
@@ -120,6 +137,7 @@ namespace projekt_trening.UserControls
 
         private void add_exercise_btn_Click(object sender, EventArgs e)
         {
+            addExerciseModal.inEditMode = false;
             addExerciseModal.ShowDialog();
         }
     }

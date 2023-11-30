@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
+            this.title = new System.Windows.Forms.Label();
             this.name_textbox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -42,17 +42,17 @@
             this.form_container.SuspendLayout();
             this.SuspendLayout();
             // 
-            // label1
+            // title
             // 
-            this.label1.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label1.Location = new System.Drawing.Point(3, 0);
-            this.label1.Margin = new System.Windows.Forms.Padding(3, 0, 3, 20);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(249, 26);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Dodaj nowe ćwiczenie";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.label1.Click += new System.EventHandler(this.label1_Click);
+            this.title.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.title.Location = new System.Drawing.Point(3, 0);
+            this.title.Margin = new System.Windows.Forms.Padding(3, 0, 3, 20);
+            this.title.Name = "title";
+            this.title.Size = new System.Drawing.Size(249, 26);
+            this.title.TabIndex = 0;
+            this.title.Text = "Dodaj nowe ćwiczenie";
+            this.title.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.title.Click += new System.EventHandler(this.label1_Click);
             // 
             // name_textbox
             // 
@@ -138,7 +138,7 @@
             // 
             // form_container
             // 
-            this.form_container.Controls.Add(this.label1);
+            this.form_container.Controls.Add(this.title);
             this.form_container.Controls.Add(this.label2);
             this.form_container.Controls.Add(this.name_textbox);
             this.form_container.Controls.Add(this.label3);
@@ -172,7 +172,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label title;
         private System.Windows.Forms.TextBox name_textbox;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;

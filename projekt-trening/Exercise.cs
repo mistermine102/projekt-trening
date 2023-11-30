@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace projekt_trening
 {
-    internal class Exercise
+    public class Exercise
     {
         public string _id;
         public string name;
@@ -62,7 +62,7 @@ namespace projekt_trening
             }
             catch (Exception ex)
             {
-                //failed to read the exercises
+                //handle exception
             }
         }
         public static async Task createExercise(Exercise newExercise)
@@ -78,7 +78,22 @@ namespace projekt_trening
             }
             catch (Exception ex)
             {
-
+                //handle exception
+            }
+        }
+        public static async Task editExercise(Exercise exercise)
+        {
+            try
+            {
+                using (HttpClient client = new HttpClient())
+                {
+                    string json = JsonConvert.SerializeObject(exercise);
+                    StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+                    await client.PutAsync(Global.apiUrl + "/exercise", content);
+                }
+            } catch (Exception ex)
+            {
+                //handle exception
             }
         }
     }

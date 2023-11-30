@@ -13,6 +13,14 @@ namespace projekt_trening.UserControls
 {
     public partial class UC_plan : UserControl
     {
+        void handleEditClick(object sender, EventArgs e, ExercisesGroup exercisesGroup)
+        {
+            addExercisesGroupModal.inEditMode = true;
+            addExercisesGroupModal.exercisesGroupToEdit = exercisesGroup;
+
+            addExercisesGroupModal modal = new addExercisesGroupModal();
+            modal.ShowDialog();
+        }
         void handleExercisesGroupAdded(object sender, EventArgs e)
         {
             displayExercisesGroups();
@@ -48,6 +56,14 @@ namespace projekt_trening.UserControls
                 delete_exercises_group.Text = "Usuń";
                 exercises_group_card.Controls.Add(delete_exercises_group);
 
+                Button edit_exercises_group_btn = new Button();
+                edit_exercises_group_btn.Click += delegate (object sender, EventArgs e)
+                {
+                    handleEditClick(sender, e, exercisesGroup);
+                };
+                edit_exercises_group_btn.Text = "Edytuj";
+                exercises_group_card.Controls.Add(edit_exercises_group_btn);
+
                 Label exercisesGroupName = new Label();
                 exercisesGroupName.Text = exercisesGroup.name;
                 exercisesGroupName.Font = new Font("Microsoft YaHei", 10, FontStyle.Bold);
@@ -77,20 +93,21 @@ namespace projekt_trening.UserControls
         {
             InitializeComponent();
             displayExercisesGroups();
-            addExercisesGroupModal.exercisesGroupAddedEvent += handleExercisesGroupAdded;
+            modal.exercisesGroupAddedEvent += handleExercisesGroupAdded;
         }
 
-        addExercisesGroupModal addExercisesGroupModal = new addExercisesGroupModal();
+        addExercisesGroupModal modal = new addExercisesGroupModal();
         private void add_exercises_group_btn_Click(object sender, EventArgs e)
         {
-            addExercisesGroupModal.ShowDialog();
+            addExercisesGroupModal.inEditMode = false;
+            modal.ShowDialog();
         }
 
         private void exercises_groups_container_Paint(object sender, PaintEventArgs e)
         {
         }
     }
-    class ExercisesGroupItem
+    public class ExercisesGroupItem
     {
         public Exercise exercise;
         public int order;

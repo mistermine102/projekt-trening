@@ -27,6 +27,7 @@ namespace projekt_trening.UserControls
         {
             InitializeComponent();
             day_name.Text = Calendar.selectedDay.dayName;
+            day_name.TextAlign = ContentAlignment.TopCenter;
             createComboboxOptions();
         }
 
@@ -44,6 +45,16 @@ namespace projekt_trening.UserControls
             ExercisesGroup selectedExercisesGroup = (ExercisesGroup)(exercises_groups_combobox.SelectedItem as ComboboxItem).Value;
 
             Calendar.selectExerciseGroupForTheDay(selectedExercisesGroup, Calendar.selectedDay);
+        }
+
+        private void label1_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void calendarDayModal_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
